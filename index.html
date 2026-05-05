@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Learn — Online Tutoring Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0d1b2e;
+  --navy2: #132240;
+  --navy3: #1a2f50;
+  --navy4: #1e3a5f;
+  --gold: #f5a623;
+  --gold2: #ffc04d;
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.45);
+  --muted2: rgba(255,255,255,0.2);
+  --border: rgba(255,255,255,0.08);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #0a1422;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+/* ── PAGE WRAPPER ── */
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+/* ── SECTION LABELS ── */
+.gui-section {
+  margin-bottom: 80px;
+}
+.gui-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gui-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.gui-label span {
+  background: rgba(245,166,35,0.1);
+  border: 1px solid rgba(245,166,35,0.3);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+/* ── SITE HEADER ── */
+.site-header {
+  text-align: center;
+  padding: 60px 20px 80px;
+  position: relative;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse at center, rgba(245,166,35,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.site-logo-icon {
+  width: 48px; height: 48px;
+  background: var(--gold);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: var(--navy);
+}
+.site-logo-text { font-size: 28px; font-weight: 800; }
+.site-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.site-header h1 span { color: var(--gold); }
+.site-header p {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+.screen-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.screen-nav a {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.screen-nav a:hover { background: var(--navy4); color: var(--white); border-color: var(--gold); }
+
+/* ── SHARED COMPONENTS ── */
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-gold:hover { background: var(--gold2); }
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.5); }
+
+.topbar {
+  background: var(--navy);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  flex-shrink: 0;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon {
+  width: 34px; height: 34px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800; color: var(--navy);
+}
+.logo-text { font-size: 17px; font-weight: 800; }
+
+.avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px;
+  flex-shrink: 0;
+}
+.av-th { background: var(--gold); color: var(--navy); }
+.av-we { background: #3b6fd4; color: #fff; }
+.av-ho { background: #7c4dbb; color: #fff; }
+
+.input-group { margin-bottom: 14px; }
+.input-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8899aa;
+  margin-bottom: 5px;
+}
+.input-field {
+  width: 100%;
+  background: #f4f6f8;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-size: 13px;
+  color: #0d1b2e;
+  font-family: inherit;
+  outline: none;
+}
+.input-field:focus { border-color: var(--gold); }
+.input-field::placeholder { color: #aab4c0; }
+select.input-field { appearance: none; cursor: pointer; }
+
+.card-white {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px;
+  color: var(--navy);
+}
+
+/* sidebar */
+.sidebar {
+  width: 200px;
+  background: var(--navy);
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-logo-area {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-nav { padding: 8px 0; flex: 1; }
+.sitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.12s;
+}
+.sitem:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+.sitem.active { color: var(--white); background: rgba(245,166,35,0.1); border-left-color: var(--gold); }
+.sitem-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+.main { flex: 1; background: var(--navy2); padding: 22px; overflow: hidden; }
+
+.screen-shell {
+  background: var(--navy2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.screen-with-sidebar {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+}
+
+.card-dark {
+  background: var(--navy3);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.stat-card {
+  background: var(--navy3);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.stat-num { font-size: 30px; font-weight: 800; color: var(--white); line-height: 1.1; }
+.stat-sublabel { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+
+.stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+.badge-blue { background: rgba(59,111,212,0.15); color: #7ab3f5; }
+.badge-gold { background: rgba(245,166,35,0.15); color: var(--gold); }
+.badge-gray { background: rgba(255,255,255,0.07); color: var(--muted); }
+
+.tutor-card {
+  background: var(--navy3);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.price { color: var(--gold); font-weight: 700; font-size: 14px; }
+
+.select-dark {
+  background: var(--navy3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--muted);
+  width: 100%;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* progress bar */
+.prog-bar { background: rgba(255,255,255,0.08); border-radius: 4px; height: 5px; margin-top: 8px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 4px; background: var(--gold); }
+
+/* message bubbles */
+.bubble { padding: 10px 14px; border-radius: 12px; font-size: 12px; max-width: 75%; line-height: 1.5; }
+.bubble-in { background: var(--navy3); color: var(--white); border-bottom-left-radius: 4px; }
+.bubble-out { background: var(--gold); color: var(--navy); border-bottom-right-radius: 4px; margin-left: auto; }
+
+/* two col grid */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.four-col { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+
+/* ── SCREEN 1: HOME PAGE ── */
+#screen1 .topbar { justify-content: space-between; }
+#screen1 .nav-links { display: flex; align-items: center; gap: 24px; }
+#screen1 .nav-link { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); }
+.hero { padding: 36px 28px 28px; }
+.hero-inner { display: flex; gap: 24px; }
+.hero-left { flex: 1; }
+.hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+}
+.hero-title { font-size: 30px; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
+.hero-title span { color: var(--gold); }
+.hero-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.hero-btns { display: flex; gap: 10px; margin-bottom: 24px; }
+.hero-stats { display: flex; gap: 24px; }
+.hstat { text-align: left; }
+.hstat-num { font-size: 20px; font-weight: 800; }
+.hstat-num sup { color: var(--gold); font-size: 14px; }
+.hstat-label { font-size: 11px; color: var(--muted); }
+.hero-right { width: 160px; flex-shrink: 0; }
+.tutors-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 10px; }
+.tutor-mini { background: var(--navy3); border-radius: var(--radius-sm); padding: 10px 12px; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.tutor-mini-name { font-size: 12px; font-weight: 700; }
+.tutor-mini-sub { font-size: 10px; color: var(--muted); }
+.tutor-mini-price { font-size: 11px; font-weight: 700; color: var(--gold); margin-top: 1px; }
+.search-row { display: flex; gap: 10px; align-items: center; padding: 0 28px 20px; }
+.search-input { flex: 1; background: var(--navy3); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.filter-pill { background: var(--navy3); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.section-label-sm { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); padding: 0 28px 12px; }
+.subjects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 0 28px 28px; }
+.subject-card { background: var(--navy3); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+.subject-icon { font-size: 24px; margin-bottom: 8px; }
+.subject-name { font-size: 12px; font-weight: 700; }
+.subject-tutor { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 0 28px 20px; }
+
+/* ── SCREEN 2 & 3: AUTH ── */
+.auth-screen { background: var(--navy2); min-height: 560px; display: flex; flex-direction: column; }
+.auth-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 30px 28px; }
+.auth-card { background: #fff; border-radius: var(--radius); padding: 32px 28px; width: 100%; max-width: 380px; }
+.auth-title { font-size: 22px; font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 4px; }
+.auth-sub { font-size: 13px; color: #6b7a8d; text-align: center; margin-bottom: 24px; }
+.auth-btn {
+  width: 100%;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 4px;
+  margin-bottom: 14px;
+}
+.auth-footer { text-align: center; font-size: 13px; color: #6b7a8d; }
+.auth-footer a { color: var(--gold); font-weight: 600; text-decoration: none; }
+.auth-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 12px; color: #6b7a8d; }
+.auth-row a { color: var(--gold); font-weight: 600; text-decoration: none; }
+.check-row { display: flex; align-items: center; gap: 6px; }
+
+/* ── SCREEN 4: DASHBOARD ── */
+.welcome-heading { font-size: 17px; font-weight: 800; margin-bottom: 3px; }
+.welcome-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.quick-actions { margin-top: 16px; }
+.qa-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qa-item { background: var(--navy3); border-radius: var(--radius-sm); padding: 16px; text-align: center; cursor: pointer; transition: background 0.15s; }
+.qa-item:hover { background: var(--navy4); }
+.qa-icon { font-size: 22px; margin-bottom: 6px; }
+.qa-label { font-size: 11px; font-weight: 600; }
+
+/* ── SCREEN 5: SEARCH TUTORS ── */
+.search-tutors-topbar { display: flex; align-items: center; gap: 14px; }
+.topbar-search { flex: 1; background: var(--navy3); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.3); }
+.filter-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
+.filter-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 5px; }
+.result-count { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.tutor-list { display: flex; flex-direction: column; gap: 10px; }
+.tcard { background: var(--navy3); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 14px; }
+.tcard-info { flex: 1; }
+.tcard-name { font-size: 15px; font-weight: 700; }
+.tcard-sub { font-size: 12px; color: var(--muted); margin: 2px 0 6px; }
+.tcard-right { text-align: right; }
+.view-btn { border: 1.5px solid var(--muted2); border-radius: var(--radius-sm); padding: 6px 14px; font-size: 11px; font-weight: 600; color: var(--white); background: transparent; cursor: pointer; font-family: inherit; margin-top: 8px; display: block; transition: border-color 0.15s; }
+.view-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── SCREEN 6: TUTOR PROFILE ── */
+.back-link { font-size: 11px; color: var(--gold); font-weight: 600; cursor: pointer; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 4px; }
+.profile-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.profile-av { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+.profile-name { font-size: 17px; font-weight: 800; }
+.profile-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.profile-price { font-size: 20px; font-weight: 800; color: var(--gold); }
+.profile-price span { font-size: 12px; color: var(--muted); font-weight: 500; }
+.profile-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.ptab { padding: 9px 16px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+.ptab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.profile-bio { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 16px; }
+.profile-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
+.pstat { background: var(--navy3); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+.pstat-val { font-size: 15px; font-weight: 800; }
+.pstat-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+/* ── SCREEN 7: BOOKING ── */
+.booking-tutor-row { background: var(--navy3); border-radius: var(--radius-sm); padding: 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.booking-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.booking-group { margin-bottom: 12px; }
+.booking-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 5px; }
+.notes-area { background: var(--navy3); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: rgba(255,255,255,0.25); min-height: 72px; margin-bottom: 20px; }
+
+/* ── SCREEN 8: PAYMENT ── */
+.payment-details { background: var(--navy3); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 16px; }
+.pd-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 12px; }
+.pd-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; }
+.pd-row.total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; font-size: 15px; font-weight: 700; }
+.pd-row span:first-child { color: var(--muted); }
+.pd-row.total span:first-child { color: rgba(255,255,255,0.7); }
+.pay-method { margin-bottom: 18px; }
+.pm-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 10px; }
+.pm-option { display: flex; align-items: center; gap: 12px; background: var(--navy3); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 8px; cursor: pointer; border: 1.5px solid var(--border); font-size: 13px; }
+.pm-option.selected { border-color: rgba(245,166,35,0.5); }
+.pm-option input { accent-color: var(--gold); }
+.secure-note { text-align: center; font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 10px; }
+
+/* ── SCREEN 9: MESSAGES ── */
+.messages-layout { display: flex; gap: 0; flex: 1; min-height: 0; }
+.msg-list { width: 220px; border-right: 1px solid var(--border); flex-shrink: 0; padding: 14px; }
+.msg-search { background: var(--navy3); border-radius: var(--radius-sm); padding: 9px 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.25); margin-bottom: 12px; }
+.msg-contact { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-sm); cursor: pointer; margin-bottom: 6px; }
+.msg-contact.active { background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25); }
+.msg-contact-name { font-size: 13px; font-weight: 600; }
+.msg-contact-preview { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
+.msg-contact-time { font-size: 10px; color: var(--muted); white-space: nowrap; margin-left: auto; align-self: flex-start; padding-top: 2px; }
+.chat-area { flex: 1; display: flex; flex-direction: column; padding: 14px; }
+.chat-header { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+.online-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; margin-left: 4px; }
+.chat-messages { flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.bubble-row { display: flex; align-items: flex-end; gap: 8px; }
+.bubble-row.out { flex-direction: row-reverse; }
+.chat-time { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.chat-input-row { display: flex; gap: 8px; align-items: center; }
+.chat-input { flex: 1; background: var(--navy3); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 12px; color: rgba(255,255,255,0.3); }
+.send-btn { width: 36px; height: 36px; background: var(--gold); border: none; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; flex-shrink: 0; }
+
+/* ── SCREEN 10: PROGRESS ── */
+.progress-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 18px; }
+.progress-sessions { margin-bottom: 16px; }
+.ps-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.ps-item { background: var(--navy3); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 8px; }
+.ps-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.ps-name { font-size: 12px; font-weight: 700; }
+.ps-date { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.feedback-card { background: var(--navy3); border-radius: var(--radius-sm); padding: 14px; display: flex; align-items: flex-start; gap: 10px; }
+.feedback-body { }
+.feedback-name { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.feedback-text { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.feedback-date { font-size: 10px; color: var(--muted); margin-top: 5px; }
+
+/* ── TWO-UP LAYOUT ── */
+.two-screens { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.full-screen { width: 100%; }
+
+/* ── SECTION SEPARATOR ── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 0 0 60px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- SITE HEADER -->
+  <div class="site-header">
+    <div class="site-logo">
+      <div class="site-logo-icon">B</div>
+      <span class="site-logo-text">Bright Learn</span>
+    </div>
+    <h1>Online Tutoring Platform — <span>GUI Design</span></h1>
+    
+    <div class="screen-nav">
+      <a href="#screen1">1. Home Page</a>
+      <a href="#screen2">2. Registration</a>
+      <a href="#screen3">3. Login</a>
+      <a href="#screen4">4. Dashboard</a>
+      <a href="#screen5">5. Search Tutors</a>
+      <a href="#screen6">6. Tutor Profile</a>
+      <a href="#screen7">7. Booking</a>
+      <a href="#screen8">8. Payment</a>
+      <a href="#screen9">9. Messages</a>
+      <a href="#screen10">10. Progress</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 1: HOME PAGE (LANDING PAGE)
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen1">
+    <div class="gui-label"><span>1. Home Page (Landing Page)</span></div>
+    <div class="screen-shell full-screen">
+      <div class="topbar" id="screen1">
+        <div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div>
+        <div class="nav-links">
+          <span class="nav-link">Find a Tutor</span>
+          <span class="nav-link">Subjects</span>
+          <span class="nav-link">How it Works</span>
+          <button class="btn-gold">Get Started</button>
+        </div>
+      </div>
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="hero-left">
+            <div class="hero-tag">Online Tutoring Platform</div>
+            <h2 class="hero-title">Expert tutors for <span>Programming,</span><br>Calculus and <span>System Analysis</span><br>and Design</h2>
+            <p class="hero-desc">Learn from qualified tutors — Thando, Welcome and Hope in live one-on-one online sessions.</p>
+            <div class="hero-btns">
+              <button class="btn-gold">Book a Session</button>
+              <button class="btn-outline">Meet Our Tutors</button>
+            </div>
+            <div class="hero-stats">
+              <div class="hstat"><div class="hstat-num">3<sup>+</sup></div><div class="hstat-label">Expert Tutors</div></div>
+              <div class="hstat"><div class="hstat-num">3<sup>+</sup></div><div class="hstat-label">Core Subjects</div></div>
+              <div class="hstat"><div class="hstat-num">4.9<sup>★</sup></div><div class="hstat-label">Student Rating</div></div>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="tutors-label">Available Tutors</div>
+            <div class="tutor-mini">
+              <div class="avatar av-th" style="width:32px;height:32px;font-size:12px;">TH</div>
+              <div><div class="tutor-mini-name">Thando</div><div class="tutor-mini-sub">Programming</div><div class="tutor-mini-price">R180/session</div></div>
+            </div>
+            <div class="tutor-mini">
+              <div class="avatar av-we" style="width:32px;height:32px;font-size:12px;">WE</div>
+              <div><div class="tutor-mini-name">Welcome</div><div class="tutor-mini-sub">Calculus</div><div class="tutor-mini-price">R160/session</div></div>
+            </div>
+            <div class="tutor-mini">
+              <div class="avatar av-ho" style="width:32px;height:32px;font-size:12px;">HO</div>
+              <div><div class="tutor-mini-name">Hope</div><div class="tutor-mini-sub">System Analysis and Design</div><div class="tutor-mini-price">R175/session</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <!-- Search -->
+      <div class="search-row">
+        <div class="search-input" style="flex:1;">🔍 Search by tutor name or subject...</div>
+        <div class="filter-pill">All Subjects ▾</div>
+        <button class="btn-gold">Search</button>
+      </div>
+      <!-- Subjects -->
+      <div class="section-label-sm">Our Subjects</div>
+      <div class="subjects-grid">
+        <div class="subject-card">
+          <div class="subject-icon">💻</div>
+          <div class="subject-name">Programming</div>
+          <div class="subject-tutor">Tutor: Thando</div>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">📐</div>
+          <div class="subject-name">Calculus</div>
+          <div class="subject-tutor">Tutor: Welcome</div>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">📊</div>
+          <div class="subject-name">System Analysis and Design</div>
+          <div class="subject-tutor">Tutor: Hope</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 2 & 3: REGISTRATION + LOGIN
+  ══════════════════════════════════════════════════════ -->
+  <div class="two-screens" style="margin-bottom:80px;">
+
+    <!-- SCREEN 2: REGISTRATION -->
+    <div id="screen2">
+      <div class="gui-label"><span>2. Registration Page</span></div>
+      <div class="screen-shell auth-screen">
+        <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+        <div class="auth-body">
+          <div class="auth-card">
+            <div class="auth-title">Create your account</div>
+            <div class="auth-sub">Join Bright Learn today</div>
+            <div class="input-group">
+              <label class="input-label">Full Name</label>
+              <input class="input-field" placeholder="Enter your full name">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Email</label>
+              <input class="input-field" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Role</label>
+              <select class="input-field"><option>I am a student</option><option>I am a tutor</option></select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Password</label>
+              <input class="input-field" type="password" placeholder="Create password">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Confirm Password</label>
+              <input class="input-field" type="password" placeholder="Confirm password">
+            </div>
+            <button class="auth-btn">Create Account</button>
+            <div class="auth-footer">Already have an account? <a href="#">Login here</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: LOGIN -->
+    <div id="screen3">
+      <div class="gui-label"><span>3. Login Page</span></div>
+      <div class="screen-shell auth-screen">
+        <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+        <div class="auth-body">
+          <div class="auth-card">
+            <div class="auth-title">Welcome back!</div>
+            <div class="auth-sub">Login to continue</div>
+            <div class="input-group">
+              <label class="input-label">Email</label>
+              <input class="input-field" placeholder="Enter your email">
+            </div>
+            <div class="input-group" style="margin-bottom:10px;">
+              <label class="input-label">Password</label>
+              <input class="input-field" type="password" placeholder="Enter your password">
+            </div>
+            <div class="auth-row">
+              <label class="check-row"><input type="checkbox" checked style="accent-color:#f5a623;"> Remember me</label>
+              <a href="#">Forgot password?</a>
+            </div>
+            <button class="auth-btn">Login</button>
+            <div class="auth-footer">Don't have an account? <a href="#">Register here</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end two-screens -->
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 4: DASHBOARD (AFTER LOGIN)
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen4">
+    <div class="gui-label"><span>4. Dashboard (After Login)</span></div>
+    <div class="screen-shell">
+      <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div><span style="font-size:20px;color:var(--muted);">☰</span></div>
+      <div class="screen-with-sidebar">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+          <div class="sidebar-nav">
+            <div class="sitem active"><span class="sitem-icon">⊞</span> Dashboard</div>
+            <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+            <div class="sitem"><span class="sitem-icon">📅</span> My Bookings</div>
+            <div class="sitem"><span class="sitem-icon">💬</span> Messages</div>
+            <div class="sitem"><span class="sitem-icon">📈</span> Progress</div>
+            <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+            <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+            <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+          </div>
+        </div>
+        <!-- Main -->
+        <div class="main">
+          <div class="welcome-heading">Welcome, Student!</div>
+          <div class="welcome-sub">Here's what's happening today.</div>
+          <div class="two-col" style="margin-bottom:12px;">
+            <div class="stat-card">
+              <div class="stat-sublabel">Upcoming Sessions</div>
+              <div class="stat-num">2</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-sublabel">Completed Sessions</div>
+              <div class="stat-num">8</div>
+            </div>
+          </div>
+          <div class="two-col" style="margin-bottom:20px;">
+            <div class="stat-card">
+              <div class="stat-sublabel">Messages</div>
+              <div class="stat-num">3</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-sublabel">Wallet Balance</div>
+              <div class="stat-num" style="color:var(--gold);">R240</div>
+            </div>
+          </div>
+          <div class="qa-title">Quick Actions</div>
+          <div class="qa-grid">
+            <div class="qa-item"><div class="qa-icon">🔍</div><div class="qa-label">Search Tutor</div></div>
+            <div class="qa-item"><div class="qa-icon">📅</div><div class="qa-label">My Bookings</div></div>
+            <div class="qa-item"><div class="qa-icon">💬</div><div class="qa-label">Messages</div></div>
+            <div class="qa-item"><div class="qa-icon">📈</div><div class="qa-label">Progress</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 5: SEARCH TUTORS PAGE
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen5">
+    <div class="gui-label"><span>5. Search Tutors Page</span></div>
+    <div class="screen-shell">
+      <!-- Topbar with search -->
+      <div class="topbar">
+        <div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div>
+        <div class="topbar-search" style="flex:1;max-width:360px;margin:0 20px;">🔍 Search for a subject...</div>
+        <span style="font-size:18px;color:var(--muted);">⚙</span>
+      </div>
+      <div style="padding:20px 24px;">
+        <div style="font-size:20px;font-weight:800;margin-bottom:16px;">Find Tutors</div>
+        <!-- Filters -->
+        <div class="filter-row">
+          <div>
+            <div class="filter-label">Subject</div>
+            <select class="select-dark"><option>All Subjects</option><option>Programming</option><option>Calculus</option><option>System Analysis</option></select>
+          </div>
+          <div>
+            <div class="filter-label">Availability</div>
+            <select class="select-dark"><option>Any Time</option><option>Today</option><option>This Week</option></select>
+          </div>
+          <div>
+            <div class="filter-label">Sort by</div>
+            <select class="select-dark"><option>Rating</option><option>Price</option><option>Sessions</option></select>
+          </div>
+          <button class="btn-gold" style="padding:10px 20px;height:fit-content;align-self:flex-end;">Search</button>
+        </div>
+        <div class="result-count">Showing <strong style="color:var(--white);">3</strong> of 3 tutors</div>
+        <!-- Tutor list -->
+        <div class="tutor-list">
+          <div class="tcard">
+            <div class="avatar av-th" style="width:46px;height:46px;font-size:17px;">TH</div>
+            <div class="tcard-info">
+              <div class="tcard-name">Thando</div>
+              <div class="tcard-sub">Programming</div>
+              <div><span class="stars">★★★★★</span> <span style="font-size:11px;color:var(--muted);">4.8 (132)</span></div>
+            </div>
+            <div class="tcard-right">
+              <div class="price">R180/session</div>
+              <button class="view-btn">View Profile</button>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="avatar av-we" style="width:46px;height:46px;font-size:17px;">WE</div>
+            <div class="tcard-info">
+              <div class="tcard-name">Welcome</div>
+              <div class="tcard-sub">Calculus</div>
+              <div><span class="stars">★★★★☆</span> <span style="font-size:11px;color:var(--muted);">4.8 (99)</span></div>
+            </div>
+            <div class="tcard-right">
+              <div class="price">R175/session</div>
+              <button class="view-btn">View Profile</button>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="avatar av-ho" style="width:46px;height:46px;font-size:17px;">HO</div>
+            <div class="tcard-info">
+              <div class="tcard-name">Hope</div>
+              <div class="tcard-sub">System Analysis and Design</div>
+              <div><span class="stars">★★★★★</span> <span style="font-size:11px;color:var(--muted);">4.9 (110)</span></div>
+            </div>
+            <div class="tcard-right">
+              <div class="price">R175/session</div>
+              <button class="view-btn">View Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 6 & 7: TUTOR PROFILE + BOOKING
+  ══════════════════════════════════════════════════════ -->
+  <div class="two-screens" style="margin-bottom:80px;">
+
+    <!-- SCREEN 6: TUTOR PROFILE -->
+    <div id="screen6">
+      <div class="gui-label"><span>6. Tutor Profile Page</span></div>
+      <div class="screen-shell" style="min-height:560px;">
+        <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+        <div class="screen-with-sidebar" style="flex:1;">
+          <div class="sidebar">
+            <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon" style="width:28px;height:28px;font-size:13px;">B</div><span style="font-size:14px;font-weight:800;">Bright Learn</span></div></div>
+            <div class="sidebar-nav">
+              <div class="sitem"><span class="sitem-icon">⊞</span> Dashboard</div>
+              <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+              <div class="sitem"><span class="sitem-icon">📅</span> My Bookings</div>
+              <div class="sitem"><span class="sitem-icon">💬</span> Messages</div>
+              <div class="sitem active"><span class="sitem-icon">📈</span> Progress</div>
+              <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+              <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+              <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+            </div>
+          </div>
+          <div class="main">
+            <div class="back-link">← Back to results</div>
+            <div class="profile-header">
+              <div class="profile-av av-th" style="background:var(--gold);color:var(--navy);">TH</div>
+              <div style="flex:1;">
+                <div class="profile-name">Thando</div>
+                <div class="profile-role">Programming Tutor</div>
+                <div style="margin-top:4px;"><span class="stars">★★★★★</span> <span style="font-size:11px;color:var(--muted);">4.8 (132 reviews)</span></div>
+              </div>
+              <div style="text-align:right;">
+                <div class="profile-price">R180 <span>/ session</span></div>
+              </div>
+            </div>
+            <div class="profile-tabs">
+              <div class="ptab active">About</div>
+              <div class="ptab">Subjects</div>
+              <div class="ptab">Reviews</div>
+              <div class="ptab">Availability</div>
+            </div>
+            <div class="profile-bio">I am a final year Computer Science student with strong experience in programming. I can help you understand concepts, complete assignments and prepare for tests.</div>
+            <div class="profile-stats">
+              <div class="pstat"><div class="pstat-val">3+ years</div><div class="pstat-label">Experience</div></div>
+              <div class="pstat"><div class="pstat-val">150+</div><div class="pstat-label">Students</div></div>
+              <div class="pstat"><div class="pstat-val">320+</div><div class="pstat-label">Sessions</div></div>
+            </div>
+            <button class="btn-gold" style="width:100%;justify-content:center;padding:13px;font-size:14px;">Book a Session</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 7: BOOKING -->
+    <div id="screen7">
+      <div class="gui-label"><span>7. Booking Page</span></div>
+      <div class="screen-shell" style="min-height:560px;">
+        <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+        <div class="screen-with-sidebar" style="flex:1;">
+          <div class="sidebar">
+            <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon" style="width:28px;height:28px;font-size:13px;">B</div><span style="font-size:14px;font-weight:800;">Bright Learn</span></div></div>
+            <div class="sidebar-nav">
+              <div class="sitem"><span class="sitem-icon">⊞</span> Dashboard</div>
+              <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+              <div class="sitem active"><span class="sitem-icon">📅</span> My Bookings</div>
+              <div class="sitem"><span class="sitem-icon">💬</span> Messages</div>
+              <div class="sitem"><span class="sitem-icon">📈</span> Progress</div>
+              <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+              <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+              <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+            </div>
+          </div>
+          <div class="main">
+            <div style="font-size:16px;font-weight:800;margin-bottom:14px;">Book a Session</div>
+            <div class="booking-tutor-row">
+              <div class="avatar av-th" style="width:40px;height:40px;font-size:15px;">TH</div>
+              <div style="flex:1;"><div style="font-size:14px;font-weight:700;">Thando</div><div style="font-size:11px;color:var(--muted);">Programming</div></div>
+              <div class="price">R180/session</div>
+            </div>
+            <div class="booking-form-row">
+              <div>
+                <div class="booking-label">Select Date</div>
+                <select class="select-dark"><option>24 May 2025</option></select>
+              </div>
+              <div>
+                <div class="booking-label">Select Time</div>
+                <select class="select-dark"><option>Select a time</option><option>10:00 AM</option><option>11:00 AM</option></select>
+              </div>
+            </div>
+            <div class="booking-label">Session Duration</div>
+            <select class="select-dark" style="margin-bottom:12px;"><option>1 hour</option><option>1.5 hours</option><option>2 hours</option></select>
+            <div class="booking-label">Notes (optional)</div>
+            <div class="notes-area">Add any notes for the tutor...</div>
+            <button class="btn-gold" style="width:100%;justify-content:center;padding:13px;font-size:14px;">Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end two-screens -->
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 8: PAYMENT PAGE
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen8">
+    <div class="gui-label"><span>8. Payment Page</span></div>
+    <div class="screen-shell">
+      <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+      <div class="screen-with-sidebar">
+        <div class="sidebar">
+          <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+          <div class="sidebar-nav">
+            <div class="sitem"><span class="sitem-icon">⊞</span> Dashboard</div>
+            <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+            <div class="sitem active"><span class="sitem-icon">📅</span> My Bookings</div>
+            <div class="sitem"><span class="sitem-icon">💬</span> Messages</div>
+            <div class="sitem"><span class="sitem-icon">📈</span> Progress</div>
+            <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+            <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+            <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+          </div>
+        </div>
+        <div class="main" style="max-width:560px;">
+          <div style="font-size:17px;font-weight:800;margin-bottom:18px;">Payment</div>
+          <div class="payment-details">
+            <div class="pd-title">Session Details</div>
+            <div class="pd-row"><span>Tutor</span><span style="color:var(--white);font-weight:500;">Thando</span></div>
+            <div class="pd-row"><span>Subject</span><span style="color:var(--white);font-weight:500;">Programming</span></div>
+            <div class="pd-row"><span>Date</span><span style="color:var(--white);font-weight:500;">24 May 2025</span></div>
+            <div class="pd-row"><span>Time</span><span style="color:var(--white);font-weight:500;">10:00 AM – 11:00 AM</span></div>
+            <div class="pd-row"><span>Duration</span><span style="color:var(--white);font-weight:500;">1 hour</span></div>
+            <div class="pd-row total"><span>Amount</span><span style="color:var(--gold);">R180.00</span></div>
+          </div>
+          <div class="pay-method">
+            <div class="pm-title">Payment Method</div>
+            <div class="pm-option selected"><input type="radio" name="pm" checked> 💳 Credit / Debit Card</div>
+            <div class="pm-option"><input type="radio" name="pm"> 📱 SnapScan</div>
+            <div class="pm-option"><input type="radio" name="pm"> 🏦 EFT / Bank Transfer</div>
+          </div>
+          <button class="btn-gold" style="width:100%;justify-content:center;padding:14px;font-size:15px;">Pay Now</button>
+          <div class="secure-note">🔒 Your payment is secure and encrypted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 9: MESSAGES / COMMUNICATION PAGE
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen9">
+    <div class="gui-label"><span>9. Messages / Communication Page</span></div>
+    <div class="screen-shell">
+      <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+      <div class="screen-with-sidebar">
+        <div class="sidebar">
+          <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+          <div class="sidebar-nav">
+            <div class="sitem"><span class="sitem-icon">⊞</span> Dashboard</div>
+            <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+            <div class="sitem"><span class="sitem-icon">📅</span> My Bookings</div>
+            <div class="sitem active"><span class="sitem-icon">💬</span> Messages</div>
+            <div class="sitem"><span class="sitem-icon">📈</span> Progress</div>
+            <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+            <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+            <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+          </div>
+        </div>
+        <div class="main" style="padding:0;display:flex;flex-direction:column;">
+          <div style="padding:16px 20px;font-size:16px;font-weight:800;border-bottom:1px solid var(--border);">Messages</div>
+          <div class="messages-layout" style="flex:1;">
+            <!-- Contact List -->
+            <div class="msg-list">
+              <div class="msg-search">🔍 Search messages</div>
+              <div class="msg-contact active">
+                <div class="avatar av-th" style="width:36px;height:36px;font-size:13px;flex-shrink:0;">TH</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="msg-contact-name">Thando</div>
+                  <div class="msg-contact-preview">Hi! Are we still on for our session today?</div>
+                </div>
+                <div class="msg-contact-time">10:48 PM</div>
+              </div>
+              <div class="msg-contact">
+                <div class="avatar av-we" style="width:36px;height:36px;font-size:13px;flex-shrink:0;">WE</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="msg-contact-name">Welcome</div>
+                  <div class="msg-contact-preview">Last seen 3h ago</div>
+                </div>
+                <div class="msg-contact-time">Yesterday</div>
+              </div>
+              <div class="msg-contact">
+                <div class="avatar av-ho" style="width:36px;height:36px;font-size:13px;flex-shrink:0;">HO</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="msg-contact-name">Hope</div>
+                  <div class="msg-contact-preview">Last seen yesterday</div>
+                </div>
+                <div class="msg-contact-time">Jul 20</div>
+              </div>
+            </div>
+            <!-- Chat Area -->
+            <div class="chat-area">
+              <div class="chat-header">
+                <div class="avatar av-th" style="width:36px;height:36px;font-size:13px;">TH</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;">Thando</div>
+                  <div style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;"><span class="online-dot"></span> Online</div>
+                </div>
+              </div>
+              <div class="chat-messages">
+                <div class="bubble-row">
+                  <div class="avatar av-th" style="width:28px;height:28px;font-size:10px;flex-shrink:0;">TH</div>
+                  <div>
+                    <div class="bubble bubble-in">Hi! Are we still on for our session today?</div>
+                    <div class="chat-time">10:48 PM</div>
+                  </div>
+                </div>
+                <div class="bubble-row out">
+                  <div>
+                    <div class="bubble bubble-out">Yes, see you then.</div>
+                    <div class="chat-time" style="text-align:right;">10:49 PM</div>
+                  </div>
+                </div>
+                <div class="bubble-row">
+                  <div class="avatar av-th" style="width:28px;height:28px;font-size:10px;flex-shrink:0;">TH</div>
+                  <div>
+                    <div class="bubble bubble-in">Great! See you then.</div>
+                    <div class="chat-time">Jul 30</div>
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input-row">
+                <div class="chat-input">Type a message...</div>
+                <button class="send-btn">➤</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 10: PROGRESS TRACKING PAGE
+  ══════════════════════════════════════════════════════ -->
+  <div class="gui-section" id="screen10">
+    <div class="gui-label"><span>10. Progress Tracking Page</span></div>
+    <div class="screen-shell">
+      <div class="topbar"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+      <div class="screen-with-sidebar">
+        <div class="sidebar">
+          <div class="sidebar-logo-area"><div class="logo"><div class="logo-icon">B</div><span class="logo-text">Bright Learn</span></div></div>
+          <div class="sidebar-nav">
+            <div class="sitem"><span class="sitem-icon">⊞</span> Dashboard</div>
+            <div class="sitem"><span class="sitem-icon">🔍</span> Search Tutor</div>
+            <div class="sitem"><span class="sitem-icon">📅</span> My Bookings</div>
+            <div class="sitem"><span class="sitem-icon">💬</span> Messages</div>
+            <div class="sitem active"><span class="sitem-icon">📈</span> Progress</div>
+            <div class="sitem"><span class="sitem-icon">👤</span> Profile</div>
+            <div class="sitem"><span class="sitem-icon">⚙️</span> Settings</div>
+            <div class="sitem"><span class="sitem-icon">⬅</span> Logout</div>
+          </div>
+        </div>
+        <div class="main">
+          <div style="font-size:17px;font-weight:800;margin-bottom:18px;">My Progress</div>
+          <div class="progress-stats">
+            <div class="stat-card"><div class="stat-sublabel">Total Sessions</div><div class="stat-num">10</div></div>
+            <div class="stat-card"><div class="stat-sublabel">Total Hours</div><div class="stat-num" style="color:var(--gold);">12h</div></div>
+            <div class="stat-card"><div class="stat-sublabel">Average Rating</div><div class="stat-num">4.8<span style="color:var(--gold);font-size:18px;">★</span></div></div>
+          </div>
+          <div class="progress-sessions">
+            <div class="ps-title">Session Progress</div>
+            <div class="ps-item">
+              <div class="ps-header">
+                <div><div class="ps-name">Programming with Thando</div><div class="ps-date">24 May 2025 · 10:00 – 11:00 PM</div></div>
+                <span class="badge badge-green">Completed</span>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:100%;"></div></div>
+            </div>
+            <div class="ps-item">
+              <div class="ps-header">
+                <div><div class="ps-name">Calculus with Welcome</div><div class="ps-date">15 May 2025 · 09:00 – 10:00 AM</div></div>
+                <span class="badge badge-green">Completed</span>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:100%;"></div></div>
+            </div>
+            <div class="ps-item">
+              <div class="ps-header">
+                <div><div class="ps-name">System Analysis & Design with Hope</div><div class="ps-date">28 May 2025 · 02:00 – 04:00 PM</div></div>
+                <span class="badge badge-green">Completed</span>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" style="width:100%;"></div></div>
+            </div>
+          </div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:10px;">Recent Feedback</div>
+          <div class="feedback-card">
+            <div class="avatar av-th" style="width:34px;height:34px;font-size:12px;flex-shrink:0;">TH</div>
+            <div class="feedback-body">
+              <div class="feedback-name">Thando <span class="stars" style="font-size:11px;">★★★★★</span></div>
+              <div class="feedback-text">Great understanding of concepts, and active participation!</div>
+              <div class="feedback-date">24 May 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page -->
+</body>
+</html>
